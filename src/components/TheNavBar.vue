@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAuthStore } from "@/store/auth";
 import { useRouter } from "vue-router";
 
 const { getRoutes } = useRouter();
+const authStore = useAuthStore();
 
 const navigation = ref(
   getRoutes()
@@ -22,16 +24,35 @@ const navigation = ref(
         }"
       >
         <template v-for="{ name, title } of navigation" v-bind:key="name">
-          <v-list-item
-            v-bind="{
-              value: name,
-              rounded: 'xl',
-              activeColor: 'error',
-              to: { name },
-            }"
-          >
-            {{ title }}
-          </v-list-item>
+          <template v-if="name === 'parcel'">
+            <v-list-item
+              v-bind="{
+                value: name,
+                rounded: 'xl',
+                activeColor: 'error',
+                to: {
+                  name: 'user-requests',
+                  params: { id: authStore?.profile?.id },
+                },
+              }"
+            >
+              {{ title }}
+            </v-list-item>
+          </template>
+          <template v-else>
+            <v-list-item
+              v-bind="{
+                value: name,
+                rounded: 'xl',
+                activeColor: 'error',
+                to: {
+                  name,
+                },
+              }"
+            >
+              {{ title }}
+            </v-list-item>
+          </template>
         </template>
       </v-list>
     </template>

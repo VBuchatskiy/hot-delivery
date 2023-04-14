@@ -1,6 +1,16 @@
 import { rest } from "msw";
 
 export const handlers = [
+  rest.get("/api/v1/auth/profile", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.delay(100),
+      ctx.json({
+        id: "1",
+        full_name: "Vladimir Buchatskyi",
+      })
+    );
+  }),
   rest.get("/api/v1/requests", (req, res, ctx) => {
     return res(
       ctx.status(200),

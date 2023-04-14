@@ -3,10 +3,13 @@ import { computed } from "vue";
 import AppTable from "@/components/AppTable.vue";
 import { useRoute } from "vue-router";
 import { useRequestsStore } from "@/store/requests";
+import { useAuthStore } from "@/store/auth";
 
 const { meta } = useRoute();
 const store = useRequestsStore();
+const authStore = useAuthStore();
 
+await authStore.getProfile();
 await store.getRequestCollection();
 
 const filters: any[] = [

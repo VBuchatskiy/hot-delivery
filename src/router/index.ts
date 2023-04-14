@@ -38,7 +38,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: "",
         redirect: (to) => {
-          return { path: `/${to.params}/requests` };
+          return { path: `/${to.params.id}/requests` };
         },
       },
       {
@@ -55,15 +55,26 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: "create",
-        name: "create",
         meta: {
           title: "create",
           protected: false,
         },
         children: [
           {
+            path: "",
+            name: "create-parcel",
+            meta: {
+              title: "parcel",
+              protected: false,
+            },
+            component: () =>
+              import(
+                /* webpackChunkName: "about" */ "../views/UserParcelView.vue"
+              ),
+          },
+          {
             path: "order",
-            name: "order",
+            name: "create-order",
             meta: {
               title: "order",
               protected: false,
@@ -75,7 +86,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             path: "deliver",
-            name: "deliver",
+            name: "create-deliver",
             meta: {
               title: "deliver",
               protected: false,
