@@ -10,17 +10,29 @@ const { meta, params } = useRoute();
     <v-card-actions>
       <b-btn
         v-bind="{
-          to: { name: 'create-order', params },
+          to: { name: 'create-order', params: { id: params.id } },
         }"
       >
         Order
       </b-btn>
       <b-btn
         v-bind="{
-          to: { name: 'create-delivery', params },
+          to: {
+            name: 'create-deliver',
+            params: { id: params.id },
+          },
         }"
       >
         Delivery
+      </b-btn>
+    </v-card-actions>
+    <v-card-actions class="d-flex justify-end">
+      <b-btn
+        v-bind="{
+          to: { name: 'user-requests', params: { id: params.id } },
+        }"
+      >
+        Cancel
       </b-btn>
     </v-card-actions>
   </v-card>

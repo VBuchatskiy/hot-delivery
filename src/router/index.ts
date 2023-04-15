@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
         path: "",
         name: "requests",
         meta: {
-          title: "requests",
+          title: "Requests",
           main: true,
           protected: false,
         },
@@ -30,13 +30,14 @@ const routes: RouteRecordRaw[] = [
     path: "/:id?",
     name: "parcel",
     meta: {
-      title: "parcel",
+      title: "Parcel",
       main: true,
       protected: false,
     },
     children: [
       {
         path: "",
+        name: "user-requests-list",
         redirect: (to) => {
           return { path: `/${to.params.id}/requests` };
         },
@@ -45,7 +46,7 @@ const routes: RouteRecordRaw[] = [
         path: "requests",
         name: "user-requests",
         meta: {
-          title: "requests",
+          title: "Requests",
           protected: false,
         },
         component: () =>
@@ -56,7 +57,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: "create",
         meta: {
-          title: "create",
+          title: "Create",
           protected: false,
         },
         children: [
@@ -64,7 +65,7 @@ const routes: RouteRecordRaw[] = [
             path: "",
             name: "create-parcel",
             meta: {
-              title: "parcel",
+              title: "Create parcel",
               protected: false,
             },
             component: () =>
@@ -72,31 +73,31 @@ const routes: RouteRecordRaw[] = [
                 /* webpackChunkName: "about" */ "../views/UserParcelView.vue"
               ),
           },
-          {
-            path: "order",
-            name: "create-order",
-            meta: {
-              title: "order",
-              protected: false,
-            },
-            component: () =>
-              import(
-                /* webpackChunkName: "about" */ "../views/UserParcelOrderView.vue"
-              ),
-          },
-          {
-            path: "deliver",
-            name: "create-deliver",
-            meta: {
-              title: "deliver",
-              protected: false,
-            },
-            component: () =>
-              import(
-                /* webpackChunkName: "about" */ "../views/UserParcelDeliverView.vue"
-              ),
-          },
         ],
+      },
+      {
+        path: "create/order",
+        name: "create-order",
+        meta: {
+          title: "Order",
+          protected: false,
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/UserParcelOrderView.vue"
+          ),
+      },
+      {
+        path: "create/deliver",
+        name: "create-deliver",
+        meta: {
+          title: "Deliver",
+          protected: false,
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/UserParcelDeliverView.vue"
+          ),
       },
     ],
     component: () =>
@@ -105,9 +106,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(
-    process.env.NODE_ENV === "production" ? "/smart-expert/" : "/"
-  ),
+  history: createWebHistory(),
   routes,
 });
 

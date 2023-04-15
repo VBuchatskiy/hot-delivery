@@ -7,7 +7,15 @@ export const useAuthStore = defineStore("auth", () => {
   const loading = ref<boolean>(false);
 
   const getProfile = async () => {
+    const $profile = window.localStorage.getItem("profile");
+
+    if ($profile) {
+      profile.value = JSON.parse($profile);
+      return;
+    }
+
     loading.value = true;
+
     try {
       const { data } = await auth.getProfile();
       window.localStorage.setItem("profile", JSON.stringify(data));

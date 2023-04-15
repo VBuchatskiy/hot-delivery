@@ -26,9 +26,10 @@ export const handlers = [
             city_from: "nikolaev",
             city_to: "budva",
             type: "gadgets",
-            dispatch_date: "4.14.2023",
+            dispatch_date: "2023-07-15",
             description: "",
-            parcel_type: "order",
+            parcel_type: "deliver",
+            create_at: "2023-02-14",
           },
           {
             id: "2",
@@ -39,9 +40,10 @@ export const handlers = [
             city_from: "nikolaev",
             city_to: "budva",
             type: "drinks",
-            dispatch_date: "4.14.2023",
+            dispatch_date: "2023-07-16",
             description: "",
             parcel_type: "order",
+            create_at: "2023-02-13",
           },
         ],
         page: 1,
@@ -50,87 +52,4 @@ export const handlers = [
       })
     );
   }),
-  // rest.get("/api/v1/parcel/:id/requests", (req, res, ctx) => {
-  //   return res(
-  //     ctx.status(200),
-  //     ctx.delay(100),
-  //     ctx.json({
-  //       items: [
-  //         {
-  //           id: "1",
-  //           customer: {
-  //             id: "1",
-  //             full_name: "Vladimir Buchatskyi",
-  //           },
-  //           city_from: "nikolaev",
-  //           city_to: "budva",
-  //           type: "gadgets",
-  //           dispatch_date: "4.14.2023",
-  //           description: "",
-  //           parcel_type: "order",
-  //         },
-  //         {
-  //           id: "1",
-  //           customer: {
-  //             id: "1",
-  //             full_name: "Vladimir Buchatskyi",
-  //           },
-  //           city_from: "nikolaev",
-  //           city_to: "budva",
-  //           type: "drinks",
-  //           dispatch_date: "4.14.2023",
-  //           description: "",
-  //           parcel_type: "order",
-  //         },
-  //       ],
-  //       page: 1,
-  //       limit: 10,
-  //       total: 2,
-  //     })
-  //   );
-  // }),
-  // rest.post("/api/v1/parcel", (req, res, ctx) => {
-  //   return res(
-  //     ctx.status(200),
-  //     ctx.delay(100),
-  //     ctx.json({
-  //       customer: {
-  //         id: "1",
-  //         full_name: "Vladimir Buchatskyi",
-  //       },
-  //       city_from: "nikolaev",
-  //       city_to: "budva",
-  //       type: "drinks",
-  //       create_at: "",
-  //       dispatch_date: "4.14.2023",
-  //       description: "",
-  //       parcel_type: "order",
-  //     })
-  //   );
-  // }),
-  // rest.patch("/api/v1/parcel", (req, res, ctx) => {
-  //   return res(
-  //     ctx.status(200),
-  //     ctx.delay(100),
-  //     ctx.json({
-  //       customer: {
-  //         id: "1",
-  //         full_name: "Vladimir Buchatskyi",
-  //       },
-  //       city_from: "nikolaev",
-  //       city_to: "budva",
-  //       type: "drinks",
-  //       create_at: "",
-  //       dispatch_date: "4.14.2023",
-  //       description: "",
-  //       parcel_type: "order",
-  //     })
-  //   );
-  // }),
-  // rest.delete(
-  //   "/api/v1/shops/:id/upload-certificate-of-incorporate",
-  //   (req, res, ctx) => {
-  //     return res(ctx.status(200), ctx.delay(100), ctx.json(null));
-  //   }
-  // ),
 ];

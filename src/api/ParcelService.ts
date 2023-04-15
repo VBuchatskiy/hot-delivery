@@ -19,14 +19,9 @@ export interface IRequestRequestParam {
 export class RequestService {
   #basePath = "requests";
 
-  public async getRequestCollection(
-    uid?: string
-  ): Promise<AxiosResponse<IRequestCollectionResponse, AxiosError>> {
-    // TODO update mock server
-    return await DeliveryService.get(this.#basePath, {
-      params: {
-        uid,
-      },
-    });
+  public async getRequestCollection(): Promise<
+    AxiosResponse<IRequestCollectionResponse, AxiosError>
+  > {
+    return await DeliveryService.get(this.#basePath);
   }
 }

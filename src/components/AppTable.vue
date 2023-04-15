@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed, defineProps, defineEmits } from "vue";
-
-interface IAppTableFilter {
-  name: string;
-  placeholder: string;
-  type: "input" | "select" | "date";
-  items?: string[];
-}
+import { ref, computed, defineProps, defineEmits } from "vue";
 
 interface IAppTableHeader {
   value: string;
@@ -27,7 +20,6 @@ interface IAppTableItem {
 
 interface IAppTableProp {
   headers: IAppTableHeader[] | string[];
-  filters: IAppTableFilter[];
   items: IAppTableItem[];
   loading?: false;
   pagination: {
@@ -39,9 +31,6 @@ interface IAppTableProp {
 
 const props = defineProps<IAppTableProp>();
 const $page = ref(props.pagination.page);
-const $filter = reactive<{ [key: string]: IAppTableFilter }>(
-  props.filters.reduce((acc, { name }) => ({ ...acc, [name]: null }), {})
-);
 const $headers = computed(() => {
   return props.headers.length
     ? props.headers.map((item) => {
@@ -63,8 +52,6 @@ const $length = computed(() => {
 });
 
 const emits = defineEmits<{
-  (event: "change:filter", page: number, filter: unknown): void;
-  (event: "item:create"): void;
   (event: "item:edit", item: unknown): void;
   (event: "item:delete", item: unknown): void;
 }>();
@@ -77,66 +64,9 @@ const emits = defineEmits<{
         height: 'auto',
       }"
     >
-      <template v-slot:prepend>
-        <v-btn v-bind="{ icon: true }">
-          <v-icon> mdi-filter </v-icon>
-        </v-btn>
-      </template>
-      <template v-slot:default>
-        <!-- filters -->
-        <v-row v-bind="{ alignContent: 'center' }">
-          <template
-            v-for="{ name, type, items, placeholder } of props.filters"
-            v-bind:key="name"
-          >
-            <template v-if="type === 'select'">
-              <v-col v-bind="{ cols: 2 }">
-                <b-select
-                  v-model="$filter[name]"
-                  v-bind="{
-                    clearable: true,
-                    placeholder,
-                    itemTitle: (title: string) => title,
-                    itemValue: (value: string) => value,
-                    hideDetails: true,
-                    items,
-                  }"
-                  v-on="{
-                    'update:modelValue': () => {
-                      $page = 1;
-                      emits('change:filter', 1, $filter);
-                    },
-                  }"
-                ></b-select>
-              </v-col>
-            </template>
-            <template v-else>
-              <v-col v-bind="{ cols: 2 }">
-                <b-text-field
-                  v-model="$filter[name]"
-                  v-bind="{
-                    clearable: true,
-                    placeholder: placeholder,
-                    hideDetails: true,
-                  }"
-                  v-on="{
-                    'update:modelValue': () => {
-                      $page = 1;
-                      emits('change:filter', 1, $filter);
-                    },
-                  }"
-                ></b-text-field>
-              </v-col>
-            </template>
-          </template>
-        </v-row>
-        <!-- filters -->
-      </template>
-
+      <slot name="prepend"> </slot>
       <template v-slot:append>
-        <b-btn v-on="{ click: () => emits('item:create') }">
-          {{ "create" }}
-        </b-btn>
+        <slot name="append"> </slot>
       </template>
     </v-toolbar>
 
@@ -205,9 +135,6 @@ const emits = defineEmits<{
         v-bind="{
           length: $length,
           totalVisible: 10,
-        }"
-        v-on="{
-          'update:modelValue': () => emits('change:filter', $page, $filter),
         }"
       ></v-pagination>
     </v-card-actions>
