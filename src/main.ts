@@ -3,7 +3,6 @@ import { createApp } from "vue";
 import { router } from "@/router";
 import { pinia, vuetify } from "@/plugins";
 import { worker } from "@/mocks/browser";
-// import "./style/style.scss";
 
 if (process.env.NODE_ENV === "development") {
   worker.start({
